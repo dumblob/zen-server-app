@@ -22,25 +22,14 @@
         "sensio/distribution-bundle": "2.1.*",
         "sensio/framework-extra-bundle": "2.1.*",
         "sensio/generator-bundle": "2.1.*",
-        "jms/security-extra-bundle": "1.2.*",
-        "jms/di-extra-bundle": "1.1.*",
+        "jms/security-extra-bundle": "*",
+        "jms/di-extra-bundle": "*",
 
         "friendsofsymfony/user-bundle": "dev-master",
         "friendsofsymfony/rest-bundle": "dev-master",
-        "ornicar/gravatar-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "dev-master",
         "hwi/oauth-bundle": "*",
-
-        "knplabs/knp-paginator-bundle": "dev-master",
-        "knplabs/knp-menu-bundle": "dev-master",
-        "craue/formflow-bundle": "dev-master",
-
-        "mopa/bootstrap-bundle": "dev-master",
-        "twitter/bootstrap": "master",
-        "manymules/fontawesome-bundle": "*",
-        "jlong/sass-twitter-bootstrap": "dev-master",
-
-        "publero/test": "dev-master"
+        "jms/serializer-bundle": "*"
     },
     "scripts": {
         "post-install-cmd": [
@@ -68,39 +57,5 @@
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative"
-    },
-    "repositories": [
-       {
-           "type": "package",
-           "package": {
-               "version": "master",
-               "name": "twitter/bootstrap",
-               "source": {
-                   "url": "https://github.com/twitter/bootstrap.git",
-                   "type": "git",
-                   "reference": "master"
-               },
-               "dist": {
-                   "url": "https://github.com/twitter/bootstrap/zipball/master",
-                   "type": "zip"
-               }
-           }
-       },
-       {
-           "type":"package",
-           "package": {
-               "version":"dev-master",
-               "name":"jlong/sass-twitter-bootstrap",
-               "source": {
-                   "url":"https://github.com/jlong/sass-twitter-bootstrap.git",
-                   "type":"git",
-                   "reference":"master"
-               },
-               "dist": {
-                   "url":"https://github.com/jlong/sass-twitter-bootstrap/archive/master",
-                   "type":"zip"
-               }
-           }
-       }
-   ]
+    }
 }

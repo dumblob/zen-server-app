@@ -1,9 +1,0 @@
-parameters:
-    hwi_oauth.user.provider.fosub_bridge.class: MH\UserBundle\Security\Core\User\MHUserProvider
-
-services:
-    mh.skeleton.form.type.user_registration:
-        class: MH\UserBundle\Form\Type\RegistrationFormType
-        arguments: [ "%fos_user.model.user.class%" ]
-        tags:
-            - { name: form.type, alias: mh_user_form_type_user_registration }

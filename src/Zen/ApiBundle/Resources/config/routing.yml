@@ -1,0 +1,24 @@
+zen_api_homepage:
+    pattern:  /{name}
+    defaults: { _controller: 'ZenApiBundle:Default:index', name: user }
+
+api.device.location:
+    pattern:  /api/device/{device_id}/location
+    defaults: { _controller: 'ZenApiBundle:Device:location', _format: json }
+    requirements:
+        _method: PUT
+        device_id: '[a-zA-Z0-9]+'
+
+api.device.delete:
+    pattern:  /api/device/{device_id}
+    defaults: { _controller: 'ZenApiBundle:Device:delete', _format: json }
+    requirements:
+        _method: DELETE
+        device_id: '[a-zA-Z0-9]+'
+
+api.device.prank:
+    pattern:  /api/device/{device_id}/prank
+    defaults: { _controller: 'ZenApiBundle:Device:prank', _format: html }
+    requirements:
+        _method: POST
+        device_id: '[a-zA-Z0-9]+'

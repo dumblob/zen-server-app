@@ -23,19 +23,10 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
-            new FOS\UserBundle\FOSUserBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
 
-            // Styles
-            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
-            new ManyMules\ManyMulesFontAwesomeBundle\ManyMulesFontAwesomeBundle(),
-
-            // MH Skeleton bundles
-            new MH\SkeletonBundle\MHSkeletonBundle(),
-            new MH\UserBundle\MHUserBundle(),
+            new Zen\ApiBundle\ZenApiBundle(),
+            new Zen\CoreBundle\ZenCoreBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
