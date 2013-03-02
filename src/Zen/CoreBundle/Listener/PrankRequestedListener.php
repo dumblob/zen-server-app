@@ -38,6 +38,11 @@ class PrankRequestedListener
             throw new NotFoundHttpException("Device ID not found");
         }
 
-        $this->notifier->send($notification->getRegistrationId(), $event->getData());
+        $content = [
+            'type' => $event->getType(),
+            'data' => json_decode($event->getData()),
+        ];
+
+        $this->notifier->send($notification->getRegistrationId(), json_encode($content));
     }
 }
