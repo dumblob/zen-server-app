@@ -16,7 +16,7 @@ abstract class AbstractNotifier
      * @param string $device_id
      * @param mixed $data
      */
-    public function send($device_id, $data);
+    public abstract function send($device_id, $data);
 
     public function setNotifications(Notifications $notifications)
     {

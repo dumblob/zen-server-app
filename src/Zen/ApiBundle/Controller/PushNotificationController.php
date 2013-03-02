@@ -1,11 +1,9 @@
 <?php
 namespace Zen\ApiBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-
-use Zen\CoreBundle\Document\PushNotification;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Zen\CoreBundle\Document\PushNotification;
 
 class PushNotificationController extends Controller
 {
@@ -31,15 +29,15 @@ class PushNotificationController extends Controller
         return new Response(null, $created ? 201 : 200);
     }
 
-    public function unregisterAction($registration_id)
+    public function unregisterAction($device_id)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
 
-        $notification = $dm->getRepository('ZenCoreBundle:PushNotification')->findOneByRegistrationId($registration_id);
+        $notification = $dm->getRepository('ZenCoreBundle:PushNotification')->findOneByDeviceId($device_id);
         if ($notification === null) {
             $message = $this->get('translator')->trans(
-                'error.registration_id_not_found',
-                ['registration_id' => $registration_id],
+                'error.device_id_not_found',
+                ['device_id' => $device_id],
                 'ZenApiBundle'
             );
 

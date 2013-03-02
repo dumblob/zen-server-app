@@ -1,5 +1,13 @@
 services:
     zen_core.push_notification.android:
-        class: Zen\CoreBundle\PushNotification
+        class: Zen\CoreBundle\PushNotification\AndroidNotifier
         calls:
             - [ setNotifications, [ '@rms_push_notifications' ] ]
+
+    zen_core.listener.prank:
+        class: Zen\CoreBundle\Listener\PrankRequestedListener
+        calls:
+            - [ setNotifier, [ '@zen_core.push_notification.android' ] ]
+            - [ setDoctrineMongo, [ '@doctrine_mongodb' ] ]
+        tags:
+            - { name: kernel.event_listener, event: prank.requested, method: onPrankRequested }
