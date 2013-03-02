@@ -40,7 +40,7 @@ class PrankRequestedListener
 
         $content = [
             'type' => $event->getType(),
-            'data' => json_decode($event->getData()),
+            'data' => $event->getData(),
         ];
 
         $this->notifier->send($notification->getRegistrationId(), json_encode($content));
