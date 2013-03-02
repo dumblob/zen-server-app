@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new FOS\RestBundle\FOSRestBundle(),
+            new RMS\PushNotificationsBundle\RMSPushNotificationsBundle(),
 
             new Zen\ApiBundle\ZenApiBundle(),
             new Zen\CoreBundle\ZenCoreBundle(),

@@ -18,7 +18,21 @@ api.device.delete:
 
 api.device.prank:
     pattern:  /api/device/{device_id}/prank
-    defaults: { _controller: 'ZenApiBundle:Device:prank', _format: html }
+    defaults: { _controller: 'ZenApiBundle:Device:prank', _format: json }
     requirements:
         _method: POST
+        device_id: '[a-zA-Z0-9]+'
+
+api.push_notification.register:
+    pattern:  /api/push-notification/{device_id}
+    defaults: { _controller: 'ZenApiBundle:PushNotification:register', _format: json }
+    requirements:
+        _method: PUT
+        device_id: '[a-zA-Z0-9]+'
+
+api.push_notification.unregister:
+    pattern:  /api/push-notification/{registration_id}
+    defaults: { _controller: 'ZenApiBundle:PushNotification:unregister', _format: json }
+    requirements:
+        _method: DELETE
         device_id: '[a-zA-Z0-9]+'

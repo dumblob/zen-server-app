@@ -2,3 +2,4 @@ error:
     device_id_not_found: Device not registered
     distance_not_valid: Unsupported distance
     no_result: No device in range
+    registration_id_not_found: Registration id not found

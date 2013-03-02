@@ -1,9 +1,0 @@
-fos_user:
-    db_driver: mongodb
-    firewall_name: main
-    user_class: MH\UserBundle\Document\User
-    group:
-        group_class: MH\UserBundle\Document\Group
-    registration:
-        form:
-            type: mh_user_form_type_user_registration

@@ -1,7 +1,5 @@
-parameters:
-#    zen_core.example.class: Zen\CoreBundle\Example
-
 services:
-#    zen_core.example:
-#        class: %zen_core.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    zen_core.push_notification.android:
+        class: Zen\CoreBundle\PushNotification
+        calls:
+            - [ setNotifications, [ '@rms_push_notifications' ] ]
