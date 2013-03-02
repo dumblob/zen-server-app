@@ -8,3 +8,4 @@ imports:
     - { resource: partial/doctrine_mongodb.yml }
     - { resource: partial/swiftmailer.yml }
     - { resource: partial/twig.yml }
+    - { resource: partial/rms_push_notifications.yml }

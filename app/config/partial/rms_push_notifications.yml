@@ -1,4 +1,4 @@
 rms_push_notifications:
-  android:
-      gcm:
-          api_key: '%android.gcm.api_key%'
+    android:
+        gcm:
+            api_key: %android_gcm_api_key%
