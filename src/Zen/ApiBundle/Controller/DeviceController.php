@@ -62,7 +62,7 @@ class DeviceController extends Controller
         return new Response(null, 200);
     }
 
-    public function prankAction($device_id)
+    public function prankAction($device_id, $target_id = null)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
         $repo = $dm->getRepository('ZenCoreBundle:DeviceLocation');
@@ -80,34 +80,36 @@ class DeviceController extends Controller
 
         $data = json_decode(urldecode($this->getRequest()->getContent()));
 
-        $distance = $dm->getRepository('ZenCoreBundle:Distance')->findOneByName($data->distance);
-        if ($distance === null) {
-            $message = $this->get('translator')->trans(
-                'error.distance_not_valid',
-                ['distance' => $data->distance],
-                'ZenApiBundle'
-            );
+        if ($target_id === null) {
+            $distance = $dm->getRepository('ZenCoreBundle:Distance')->findOneByName($data->distance);
+            if ($distance === null) {
+                $message = $this->get('translator')->trans(
+                    'error.distance_not_valid',
+                    ['distance' => $data->distance],
+                    'ZenApiBundle'
+                );
 
-            return new Response(json_encode(['message' => $message]), 404);
+                return new Response(json_encode(['message' => $message]), 404);
+            }
+            $distance = $distance->getRange();
+
+            $qb = $repo->createQueryBuilder()
+                ->field('deviceId')->notEqual($location->getDeviceId())
+                ->field('latitude')->range($location->getLatitude() - $distance, $location->getLatitude() + $distance)
+                ->field('longitude')->range($location->getLongitude() - $distance, $location->getLongitude() + $distance)
+            ;
+            $locations = $qb->getQuery()->execute()->toArray();
+            if (count($locations) === 0) {
+                $message = $this->get('translator')->trans('error.no_result', ['device_id' => $device_id], 'ZenApiBundle');
+
+                return new Response(json_encode(['message' => $message]), 404);
+            }
+
+            $ids = array_keys($locations);
+            $target_id = $locations[$ids[rand(0, count($locations) - 1)]]->getDeviceId();
         }
-        $distance = $distance->getRange();
 
-        $qb = $repo->createQueryBuilder()
-            ->field('deviceId')->notEqual($location->getDeviceId())
-            ->field('latitude')->range($location->getLatitude() - $distance, $location->getLatitude() + $distance)
-            ->field('longitude')->range($location->getLongitude() - $distance, $location->getLongitude() + $distance)
-        ;
-        $locations = $qb->getQuery()->execute()->toArray();
-        if (count($locations) === 0) {
-            $message = $this->get('translator')->trans('error.no_result', ['device_id' => $device_id], 'ZenApiBundle');
-
-            return new Response(json_encode(['message' => $message]), 404);
-        }
-
-        $ids = array_keys($locations);
-        $target = $locations[$ids[rand(0, count($locations) - 1)]];
-
-        $event = new PrankRequestedEvent($target->getDeviceId(), $data->type, $data->data);
+        $event = new PrankRequestedEvent($target_id, $data->type, $data->data);
         $this->get('event_dispatcher')->dispatch(PrankRequestedEvent::EVENT_NAME, $event);
 
         return new Response(null, 200);

@@ -17,8 +17,8 @@ api.device.delete:
         device_id: '[a-zA-Z0-9]+'
 
 api.device.prank:
-    pattern:  /api/device/{device_id}/prank
-    defaults: { _controller: 'ZenApiBundle:Device:prank', _format: json }
+    pattern:  /api/device/{device_id}/prank/{target_id}
+    defaults: { _controller: 'ZenApiBundle:Device:prank', _format: json, target_id: null }
     requirements:
         _method: POST
         device_id: '[a-zA-Z0-9]+'
